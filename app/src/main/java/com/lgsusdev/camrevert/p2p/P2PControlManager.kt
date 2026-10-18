@@ -163,8 +163,7 @@ enum class ConnState { DISCONNECTED, CONNECTING, ONLINE, ERROR }
  *   `ConnectByServer VP` que solo aparecen en la app oficial cuando conecta
  *   (`result:1`). Los intentos del bloque antiguo siguen pasando `""` (nunca `null`)
  *   para no exponer un `jstring` nulo al JNI.
- *   La licencia PPCS del original (`BJHJAABPPKMB…`, bajada de
- *   `https://authentication.eye4.cn/getInitstring`) se inyecta en
+ *   La licencia PPCS del original (InitString de 108 chars, ver §10.9) se inyecta en
  *   `PPCS_Initialize(..., APILicense)` **dentro** de la vtable de la interfaz: no
  *   tiene ningún camino desde los 20 JNI de `JNIApi`, así que no hay nada que
  *   pasarle a `create`.
@@ -770,7 +769,7 @@ object P2PControlManager {
             false
         }
         if (ppcsInitialized) {
-            log("init", "SDK P2P inicializado · InitString=${PpcsShim.initString().take(12)}…")
+            log("init", "SDK P2P inicializado · InitString=${if (PpcsShim.hasLicense()) "presente" else "AUSENTE (cam.ppcsLicense)"}")
         } else {
             log("init", "AVISO: el SDK P2P sigue sin inicializar; el túnel no se podrá montar")
         }

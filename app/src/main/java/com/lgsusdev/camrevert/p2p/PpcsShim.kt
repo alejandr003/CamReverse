@@ -1,5 +1,7 @@
 package com.lgsusdev.camrevert.p2p
 
+import com.lgsusdev.camrevert.BuildConfig
+
 /**
  * Puente mínimo a `PPCS_Initialize()` de `libOKSMARTPPCS.so`.
  *
@@ -26,8 +28,9 @@ package com.lgsusdev.camrevert.p2p
  *
  * `PPCS_Initialize` no es un símbolo `Java_*`, así que no puede enlazarse desde
  * Kotlin: hace falta este `.c` que lo localiza con `dlopen`/`dlsym`. El InitString
- * (108 chars) vive dentro del propio `.so` @ `0x25d10`; está copiado literal en
- * `cpp/ppcs_shim.c`.
+ * (108 chars, dentro del `.so` @ `0x25d10`) **no se copia en el código**: se lee de
+ * `secrets.properties` (`cam.ppcsLicense`, ignorado por git) y se pasa al nativo
+ * como argumento, para que el repositorio no contenga la licencia del fabricante.
  *
  * Se llama **una sola vez** antes de la cascada ([initialize] es idempotente a
  * nivel de app; a nivel de SDK una segunda llamada devuelve `-2`, que aquí se
@@ -41,28 +44,30 @@ object PpcsShim {
     }
 
     @JvmStatic
-    private external fun nativeInitialize(): Int
+    private external fun nativeInitialize(initString: String): Int
 
-    @JvmStatic
-    private external fun nativeInitString(): String
+    /** Licencia PPCS del fabricante, inyectada por Gradle desde `secrets.properties`. */
+    fun license(): String = BuildConfig.CAM_PPCS_LICENSE
 
-    /** Devuelve el InitString que se inyecta (para la consola diagnóstica). */
-    fun initString(): String = try {
-        nativeInitString()
-    } catch (t: Throwable) {
-        "<no disponible: ${t.javaClass.simpleName}>"
-    }
+    /** `true` si hay licencia configurada (para no llamar al SDK con cadena vacía). */
+    fun hasLicense(): Boolean = license().isNotBlank()
 
     /**
      * Llama a `PPCS_Initialize(InitString)`.
      *
-     * @return `true` si el SDK quedó inicializado. Los códigos `-1000`/`-1001`
-     * (falta la librería o el símbolo) y `-1002` (excepción) también devuelven
-     * `false`; `-2` del SDK («ya inicializado») cuenta como éxito.
+     * @return `true` si el SDK quedó inicializado. Sin licencia en
+     * `secrets.properties` no se llama al SDK y devuelve `false` (el túnel sigue
+     * funcionando por `cachedIps`). Los códigos `-1000`/`-1001` (falta la librería
+     * o el símbolo), `-1002` (excepción) y `-1003` (sin InitString) también
+     * devuelven `false`; `-2` del SDK («ya inicializado») cuenta como éxito.
      */
     fun initialize(): Boolean {
+        if (!hasLicense()) {
+            log("PPCS_Initialize", "omitido: falta cam.ppcsLicense en secrets.properties")
+            return false
+        }
         val rc = try {
-            nativeInitialize()
+            nativeInitialize(license())
         } catch (t: Throwable) {
             log("PPCS_Initialize", "ERROR ${t.javaClass.simpleName}: ${t.message}")
             return false
@@ -79,6 +84,7 @@ object PpcsShim {
         rc == -1000 -> "no se pudo dlopen(libOKSMARTPPCS.so)"
         rc == -1001 -> "PPCS_Initialize no está exportado"
         rc == -1002 -> "excepción JNI"
+        rc == -1003 -> "sin InitString (falta cam.ppcsLicense)"
         else -> "revisar §10.9 de AGENTS.md"
     }
 

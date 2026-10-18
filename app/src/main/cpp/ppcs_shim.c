@@ -24,46 +24,55 @@
  * porque `PPCS_Initialize` no es un símbolo `Java_*` y por tanto no puede enlazarse
  * desde Kotlin directamente.
  *
- * El InitString (108 chars) está **dentro del propio .so**, en 0x25d10; se copia
- * literal para no depender de la dirección base del mapeo.
+ * El InitString (108 chars) está **dentro del propio .so**, en 0x25d10. Aquí NO se
+ * copia: **llega como argumento desde Kotlin**, que lo lee de `secrets.properties`
+ * (`cam.ppcsLicense`, fuera del repositorio). Así este `.c` no lleva ningún literal
+ * de licencia — ni aquí ni en el historial de git a partir de ahora.
  */
 
 #include <jni.h>
 #include <dlfcn.h>
-#include <string.h>
-
-/* Literales de 0x25d10 en libOKSMARTPPCS.so (v1 de O-KAM Pro, com.okampro.oksmart). */
-static const char kInitString[] =
-    "BJHJAABPPKMBDNMABCDGEMALHMNECFNCDBAFBBGAALMMLPLHDLAMCAOECIKBMMOAAF"
-    "JOLBDHLMNCEFCGMPIEMMFJJBKDBBHMAFCJHABDIEKE";
 
 typedef int (*ppcs_init_t)(const char *initString);
 
 /* Códigos propios, por debajo de la gama PPCS (-1..-19) para no confundirlos. */
-#define SHIM_ERR_DLOPEN    -1000
-#define SHIM_ERR_DLSYM     -1001
-#define SHIM_ERR_EXCEPTION -1002
+#define SHIM_ERR_DLOPEN     -1000
+#define SHIM_ERR_DLSYM      -1001
+#define SHIM_ERR_EXCEPTION  -1002
+#define SHIM_ERR_NO_STRING  -1003
 
 JNIEXPORT jint JNICALL
-Java_com_lgsusdev_camrevert_p2p_PpcsShim_nativeInitialize(JNIEnv *env, jclass clazz)
+Java_com_lgsusdev_camrevert_p2p_PpcsShim_nativeInitialize(JNIEnv *env, jclass clazz,
+                                                          jstring initString)
 {
-    (void) env;
     (void) clazz;
+
+    /* Sin InitString no se llama: `cs2p2p_PPPP_Initialize` devolvería -5 y sería
+     * indistinguible de un rechazo real de la licencia. */
+    if (initString == NULL) return SHIM_ERR_NO_STRING;
+
+    const char *str = (*env)->GetStringUTFChars(env, initString, NULL);
+    if (str == NULL) return SHIM_ERR_NO_STRING;      /* OOM al copiar la cadena */
+    if (str[0] == '\0') {
+        (*env)->ReleaseStringUTFChars(env, initString, str);
+        return SHIM_ERR_NO_STRING;
+    }
 
     /* RTLD_NOW sin NOLOAD: si JNIApi ya cargó la lib devuelve el mismo handle,
      * y si no, el linker la carga desde el directorio nativo de la app. */
     void *handle = dlopen("libOKSMARTPPCS.so", RTLD_NOW);
-    if (handle == NULL) return SHIM_ERR_DLOPEN;
+    if (handle == NULL) {
+        (*env)->ReleaseStringUTFChars(env, initString, str);
+        return SHIM_ERR_DLOPEN;
+    }
 
     ppcs_init_t init = (ppcs_init_t) dlsym(handle, "PPCS_Initialize");
-    if (init == NULL) return SHIM_ERR_DLSYM;
+    if (init == NULL) {
+        (*env)->ReleaseStringUTFChars(env, initString, str);
+        return SHIM_ERR_DLSYM;
+    }
 
-    return init(kInitString);
-}
-
-JNIEXPORT jstring JNICALL
-Java_com_lgsusdev_camrevert_p2p_PpcsShim_nativeInitString(JNIEnv *env, jclass clazz)
-{
-    (void) clazz;
-    return (*env)->NewStringUTF(env, kInitString);
+    int rc = init(str);
+    (*env)->ReleaseStringUTFChars(env, initString, str);
+    return rc;
 }

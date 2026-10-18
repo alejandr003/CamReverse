@@ -466,7 +466,7 @@ create(did, "") → clientSetVuid(handle, vuid) → connect(handle, mode, target
   DID*** (`handle+0x40`), el de la segunda lente, y solo se usa si mide **exactamente
   17**. `""` (longitud 0 ≠ 17) recorre exactamente la misma rama que `NULL`, así que
   `create(did, "")` es correcto y **no hay nada que arreglar en ese argumento**. La
-  licencia PPCS del original (`BJHJAABPPKMB…`, 108 chars en `0x25d10`) **no** se inyecta
+  licencia PPCS del original (InitString de 108 chars en `0x25d10`) **no** se inyecta
   por este camino. `PPCS_Initialize` solo lo llama `Initialize_V1` (`0x44b7c`), que es
   la entrada `+0x00` de la vtable de interfaz (`0xb6838`) — y **ninguna función invoca
   esa entrada**: `client_create` usa la `+0x10` (`NetworkDetect_V1` `0x450a4`) y no
@@ -1509,7 +1509,9 @@ Todo lo marcado como **inferido** en §5, más:
    paquete de 21 bytes que manda O-KAM Pro a `<ip>:65530` **no está extraído todavía**;
    mientras, la IP directa se pasa por `cachedIps` (`net_ips`), que es el mecanismo
    documentado del propio SDK para la conexión LAN.
-9. **`PPCS_Initialize` y la licencia — CORREGIDO.** El InitString `BJHJAABPPKMB…`
+9. **`PPCS_Initialize` y la licencia — CORREGIDO.** El InitString (108 chars,
+   `0x25d10`; **no se copia en el repositorio**: se inyecta desde
+   `secrets.properties` → `cam.ppcsLicense` y se pasa al shim como argumento)
    (108 chars, en `0x25d10`) **no** se inyecta por ningún camino del XAPK, así que el SDK
    nunca se inicializa. Pero la explicación anterior estaba mal en **dos** puntos:
 
@@ -1538,12 +1540,14 @@ Todo lo marcado como **inferido** en §5, más:
    `{"InitString":"%s","0x7X_Timeout":20,"SkipP2P":1}` (`0x2520d`), porque compara
    `str[0]`/`str[1]` contra `0x7b` (`'{'`).
 
-   Implementación: `app/src/main/cpp/ppcs_shim.c` → `libpcs_shim.so` (4.8 KB), que
+   Implementación: `app/src/main/cpp/ppcs_shim.c` → `libpcs_shim.so` (~5 KB), que
    hace `dlopen("libOKSMARTPPCS.so")` + `dlsym("PPCS_Initialize")` y le pasa el
-   InitString copiado literal. Se enlaza desde Kotlin con
+   InitString **como argumento** (el `.c` no lleva ningún literal: lo lee Kotlin de
+   `secrets.properties` → `cam.ppcsLicense`, fuera del repositorio; sin esa clave se
+   omite la llamada y el túnel sigue por `cachedIps`). Se enlaza desde Kotlin con
    `com.lgsusdev.camrevert.p2p.PpcsShim` (CMake 3.22.1, `-DANDROID_STL=none`) y se
    llama **una sola vez** en `P2PControlManager.init()`, tras `JNIApi.init()`.
-   `-2` («ya inicializado») se cuenta como éxito.
+   `-2` («ya inicializado») se cuenta como éxito; `-1003` = sin InitString.
 
    **Estado: sin verificar en equipo.** No hay ninguna captura que muestre la línea
    `PPCS_Initialize: rc=…` (la del shim va a logcat con tag propio, no a la consola

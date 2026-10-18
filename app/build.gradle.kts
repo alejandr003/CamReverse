@@ -96,6 +96,12 @@ android {
         // devuelve `result=-2`. Se queda en `secrets.properties` (ver .gitignore).
         buildConfigField("String", "CAM_ACCOUNT_USER", "\"${secret("cam.accountUser")}\"")
         buildConfigField("String", "CAM_ACCOUNT_PASSWORD", "\"${secret("cam.accountPassword")}\"")
+        // Licencia del SDK P2P (InitString de 108 chars que vive en libOKSMARTPPCS.so
+        // @ 0x25d10). Es del FABRICANTE, no del usuario, pero no se publica en el
+        // repositorio: se inyecta desde `secrets.properties` (`cam.ppcsLicense`) y se
+        // pasa al shim como argumento. Sin ella la app compila y el túnel sigue
+        // funcionando por `cachedIps`; solo se omite `PPCS_Initialize` (§10.9).
+        buildConfigField("String", "CAM_PPCS_LICENSE", "\"${secret("cam.ppcsLicense")}\"")
         buildConfigField("int", "CAM_PORT_FIXED", secrets.getProperty("cam.portFixed", "10555"))
         buildConfigField("int", "CAM_PORT_PTZ", secrets.getProperty("cam.portPtz", "10554"))
     }
