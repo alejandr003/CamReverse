@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cr_background"
+    android:fitsSystemWindows="false">
+
+    <!-- ================================================================
+         Contenido normal
+         ================================================================ -->
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Barra superior: estado P2P + sonido global + consola + ajustes -->
+        <LinearLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="6dp">
+
+            <View
+                android:id="@+id/stateDot"
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:background="@drawable/bg_dpad" />
+
+            <TextView
+                android:id="@+id/tvP2pState"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="@string/p2p_disconnected"
+                android:textColor="@color/cr_text_secondary"
+                android:textSize="13sp" />
+
+            <!-- Único control global de sonido (punto 6) -->
+            <ImageView
+                android:id="@+id/btnSoundGlobal"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:contentDescription="@string/unmute"
+                android:padding="8dp"
+                android:src="@drawable/ic_volume_x"
+                tools:ignore="RtlSymmetry" />
+
+            <!-- Consola diagnóstica P2P (punto 1) -->
+            <ImageView
+                android:id="@+id/btnConsole"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:contentDescription="@string/console"
+                android:padding="8dp"
+                android:src="@drawable/ic_terminal"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/btnP2pToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/bg_button"
+                android:paddingStart="10dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="6dp"
+                android:text="@string/p2p_connect"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/btnSettings"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="4dp"
+                android:contentDescription="@string/settings"
+                android:padding="8dp"
+                android:src="@drawable/ic_settings"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+
+        <!-- Selector de vista de lente: Fija / Ambas / PTZ (punto 6) -->
+        <LinearLayout
+            android:id="@+id/lensSelector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp">
+
+            <TextView
+                android:id="@+id/btnLensFixed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="@string/cam_fixed"
+                android:textColor="@color/cr_text_secondary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btnLensBoth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="@string/cam_both"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btnLensPtz"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="@string/cam_ptz"
+                android:textColor="@color/cr_text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Área de las dos cámaras. En vertical «Ambas» el código le asigna una
+             altura exacta (16:9 por lente, ≈40 % de la pantalla, punto 3) para que
+             el panel de abajo conserve ≥48-50 % de espacio libre. -->
+        <LinearLayout
+            android:id="@+id/camerasRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.lgsusdev.camrevert.ui.CameraStreamView
+                android:id="@+id/camFixed"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <View
+                android:id="@+id/cameraDivider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/cr_stroke" />
+
+            <com.lgsusdev.camrevert.ui.CameraStreamView
+                android:id="@+id/camPtz"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <!-- Pestañas inferiores -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cr_surface" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/cr_stroke" />
+
+        <!-- Contenido de la pestaña activa: se queda con TODO el espacio que no
+             ocupan las cámaras (punto 3). Cada pestaña trae su propio
+             `NestedScrollView`, así que el contenido largo siempre es desplazable. -->
+        <FrameLayout
+            android:id="@+id/tabContent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/cr_surface" />
+    </LinearLayout>
+
+    <!--
+        Superposición de pantalla completa (punto 6)
+        Controles translúcidos flotantes sobre la lente elegida.
+        NO es clickable: así los gestos de zoom/arrastre siguen llegando al
+        vídeo que queda debajo, en contentLayout.
+    -->
+    <FrameLayout
+        android:id="@+id/fullscreenOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <!-- Salir -->
+        <ImageView
+            android:id="@+id/btnFsExit"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_chip"
+            android:contentDescription="@string/exit_fullscreen"
+            android:padding="10dp"
+            android:src="@drawable/ic_minimize"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/tvFsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_chip"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp"
+            android:text="@string/cam_fixed"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- Cruceta PTZ translúcida (solo útil en la lente PTZ) -->
+        <GridLayout
+            android:id="@+id/fsDpadGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="10dp"
+            android:columnCount="3"
+            android:rowCount="3">
+
+            <ImageView
+                android:id="@+id/fsBtnUp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:contentDescription="@string/ptz_hold_hint"
+                android:padding="10dp"
+                android:src="@drawable/ic_triangle_up"
+                android:tint="@color/fs_dpad_tint" />
+
+            <ImageView
+                android:id="@+id/fsBtnLeft"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_column="0"
+                android:layout_row="1"
+                android:contentDescription="@string/ptz_hold_hint"
+                android:padding="10dp"
+                android:rotation="270"
+                android:src="@drawable/ic_triangle_up"
+                android:tint="@color/fs_dpad_tint" />
+
+            <ImageView
+                android:id="@+id/fsBtnCenter"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:contentDescription="@string/ptz_center"
+                android:padding="9dp"
+                android:src="@drawable/ic_crosshair"
+                android:tint="@color/fs_dpad_tint" />
+
+            <ImageView
+                android:id="@+id/fsBtnRight"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_column="2"
+                android:layout_row="1"
+                android:contentDescription="@string/ptz_hold_hint"
+                android:padding="10dp"
+                android:rotation="90"
+                android:src="@drawable/ic_triangle_up"
+                android:tint="@color/fs_dpad_tint" />
+
+            <ImageView
+                android:id="@+id/fsBtnDown"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_column="1"
+                android:layout_row="2"
+                android:contentDescription="@string/ptz_hold_hint"
+                android:padding="10dp"
+                android:rotation="180"
+                android:src="@drawable/ic_triangle_up"
+                android:tint="@color/fs_dpad_tint" />
+        </GridLayout>
+
+        <!-- Columna de controles flotantes: zoom, audio, foto -->
+        <LinearLayout
+            android:id="@+id/fsControls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_chip"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/btnFsZoomIn"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_button"
+                android:contentDescription="@string/zoom_in"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFsZoom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="1.0x"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/btnFsZoomOut"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_button"
+                android:contentDescription="@string/zoom_out"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btnFsSound"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:contentDescription="@string/unmute"
+                android:padding="9dp"
+                android:src="@drawable/ic_volume_x"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/btnFsPhoto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/take_photo"
+                android:padding="9dp"
+                android:src="@drawable/ic_camera"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/btnFsAudio"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/call"
+                android:padding="9dp"
+                android:src="@drawable/ic_mic"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- ================================================================
+         Consola diagnóstica P2P (punto 1)
+         ================================================================ -->
+    <LinearLayout
+        android:id="@+id/consoleOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E60B0F14"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="14dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/console_title"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnConsoleClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
+                android:text="@string/console_clear"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/btnConsoleClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_button"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
+                android:text="@string/close"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="6dp"
+            android:text="@string/console_hint"
+            android:textColor="@color/cr_text_dim"
+            android:textSize="11sp" />
+
+        <ScrollView
+            android:id="@+id/consoleScroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/consoleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:lineSpacingExtra="2dp"
+                android:paddingStart="14dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/console_empty"
+                android:textColor="@color/cr_text_secondary"
+                android:textIsSelectable="true"
+                android:textSize="11sp" />
+        </ScrollView>
+    </LinearLayout>
+</FrameLayout>

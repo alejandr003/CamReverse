@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Pestaña PTZ (punto 3).
+
+    La raíz es un `NestedScrollView` correctamente configurado (`fillViewport`,
+    `overScrollMode="never"`, sin nestedScrollingEnabled en los hijos) para que el
+    contenido nunca quede recortado por la altura reducida del panel en vertical
+    «Ambas». La cruceta es una **rueda compacta** estilo O-KAM: 4 rodamientos +
+    centro, con «Corrección PTZ» y los dos cruceros (vertical / horizontal) a su lado.
+    O-KAM no expone diagonales en el cabezal: el panel oficial es una palanca de 4
+    ejes.
+-->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:overScrollMode="never"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp">
+
+        <!-- Rueda PTZ compacta + acciones al lado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- 4 rodamientos + centro, sin solapes -->
+            <FrameLayout
+                android:id="@+id/ptzWheel"
+                android:layout_width="152dp"
+                android:layout_height="152dp">
+
+                <ImageView
+                    android:id="@+id/btnUp"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/sel_dpad"
+                    android:contentDescription="up"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_triangle_up"
+                    tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                    android:id="@+id/btnDown"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/sel_dpad"
+                    android:contentDescription="down"
+                    android:padding="11dp"
+                    android:rotation="180"
+                    android:src="@drawable/ic_triangle_up"
+                    tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                    android:id="@+id/btnLeft"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="3dp"
+                    android:background="@drawable/sel_dpad"
+                    android:contentDescription="left"
+                    android:padding="11dp"
+                    android:rotation="270"
+                    android:src="@drawable/ic_triangle_up"
+                    tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                    android:id="@+id/btnRight"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/sel_dpad"
+                    android:contentDescription="right"
+                    android:padding="11dp"
+                    android:rotation="90"
+                    android:src="@drawable/ic_triangle_up"
+                    tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                    android:id="@+id/btnCenter"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/sel_dpad"
+                    android:contentDescription="@string/ptz_center"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_crosshair"
+                    tools:ignore="RtlSymmetry" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/btnPtzCorrect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/ptz_correction"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/btnPtzCruiseV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_button"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/ptz_cruise_vertical"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/btnPtzCruiseH"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_button"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/ptz_cruise_horizontal"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvCruiseState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:text="@string/ptz_cruise_off"
+                    android:textColor="@color/cr_text_dim"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/ptz_hold_hint"
+            android:textColor="@color/cr_text_dim"
+            android:textSize="11sp" />
+
+        <!-- Presets -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/ptz_presets"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etPresetId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="1"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textColor="@color/cr_text_primary"
+                android:textColorHint="@color/cr_text_dim"
+                android:textSize="13sp"
+                tools:ignore="LabelFor,RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/btnGotoPreset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_button"
+                android:paddingStart="10dp"
+                android:paddingTop="7dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="7dp"
+                android:text="@string/ptz_goto_preset"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/btnSetPreset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_button"
+                android:paddingStart="10dp"
+                android:paddingTop="7dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="7dp"
+                android:text="@string/ptz_set_preset"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+
+        <!-- Mapeo de flechas -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/ptz_mapping"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swInvertX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="38dp"
+            android:text="@string/ptz_invert_x"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="13sp" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swInvertY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="38dp"
+            android:text="@string/ptz_invert_y"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="13sp" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

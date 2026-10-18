@@ -1,0 +1,11 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="@color/cr_icon">
+    <!-- Flecha rellena (rotable en runtime para las 4 direcciones de la cruceta) -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M12,6 L19,18 L5,18 Z" />
+</vector>

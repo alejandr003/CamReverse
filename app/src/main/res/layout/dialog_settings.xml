@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="20dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cfg_ip"
+            android:textColor="@color/cr_text_secondary"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/etIp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/cfg_uid"
+            android:textColor="@color/cr_text_secondary"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/etUid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/cfg_vuid"
+            android:textColor="@color/cr_text_secondary"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/etVuid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/cfg_p2p_did"
+            android:textColor="@color/cr_text_secondary"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/etP2pDid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/cfg_das_address"
+            android:textColor="@color/cr_text_secondary"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/etDasAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp"
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cfg_user"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cfg_password"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Cuenta EYE4: la camara exige un token de esta cuenta en cada sesion
+             (`eye4_authentication.cgi`). Solo se usa en local para pedirlo a
+             https://api.eye4.cn; no se envia al equipo mas que el token. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cfg_account_user"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etAccountUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cfg_account_password"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etAccountPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cfg_port_fixed"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etPortFixed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cfg_port_ptz"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etPortPtz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Punto 4 — canal y códec del intercomunicador -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cfg_voice_channel"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etVoiceChannel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cfg_voice_codec"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerVoiceCodec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:padding="6dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Comportamiento (no son credenciales: se aplican en caliente) -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/cr_stroke" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swAutoConnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:text="@string/cfg_auto_connect"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swPreferSoftware"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:text="@string/cfg_prefer_software"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/btnScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_button"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/cfg_scan"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvScanResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="monospace"
+            android:textColor="@color/cr_text_dim"
+            android:textSize="11sp" />
+    </LinearLayout>
+</ScrollView>

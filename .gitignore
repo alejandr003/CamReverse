@@ -1,0 +1,27 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Credenciales de la cámara y de la cuenta (IP, UID/VUID, contraseñas, token de sesión).
+# NUNCA se suben a GitHub. Plantilla versionada: secrets.properties.example
+#
+# `secrets.properties` es el `.env` de este proyecto. También se acepta un archivo
+# `.env` en la raíz (sintaxis CLAVE=VALOR idéntica); se usa si no existe el anterior.
+secrets.properties
+.env
+
+# Volcados de crash de la JVM de Gradle: basura regenerable, a veces de varios MB.
+hs_err_pid*.log
+replay_pid*.log

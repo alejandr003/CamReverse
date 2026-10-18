@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <!-- Superficie de video con zoom digital (TextureView en todas las versiones) -->
+    <com.lgsusdev.camrevert.ui.ZoomableVideoLayout
+        android:id="@+id/zoomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000" />
+
+    <!-- Etiqueta de lente (top-left) -->
+    <LinearLayout
+        android:id="@+id/chipLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_chip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/ivLabelIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_videocam"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/tvLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            tools:text="Fija" />
+    </LinearLayout>
+
+    <!-- HUD pasivo: estado / resolución / KB/s (punto 2, sin sondas TCP) -->
+    <TextView
+        android:id="@+id/tvHud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_chip"
+        android:fontFamily="monospace"
+        android:gravity="end"
+        android:lineSpacingExtra="2dp"
+        android:paddingStart="8dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/cr_text_secondary"
+        android:textSize="11sp"
+        tools:text="Reproduciendo\n1920x1080  412 KB/s" />
+
+    <!-- Indicador de buffering -->
+    <ProgressBar
+        android:id="@+id/progressBuffer"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/cr_accent"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <!-- Mensaje de estado vacío -->
+    <TextView
+        android:id="@+id/tvPlaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_panel"
+        android:paddingStart="14dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="8dp"
+        android:text="@string/state_idle"
+        android:textColor="@color/cr_text_secondary"
+        android:textSize="13sp" />
+
+    <!--
+        Barra compacta única bajo la cámara: [⛶] · [-] 1.0x [+] · HD/SD.
+        No hay icono de altavoz por cámara: el sonido es un único control global
+        en la barra superior (punto 6).
+    -->
+    <LinearLayout
+        android:id="@+id/controlsRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/bg_chip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="3dp">
+
+        <ImageView
+            android:id="@+id/btnFullscreen"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:contentDescription="@string/fullscreen"
+            android:padding="7dp"
+            android:src="@drawable/ic_maximize"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Zoom compacto: [-] 1.0x [+] -->
+        <TextView
+            android:id="@+id/btnZoomOut"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_button"
+            android:contentDescription="@string/zoom_out"
+            android:gravity="center"
+            android:minWidth="30dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="-"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/tvZoomLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:text="1.0x"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="12sp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/btnZoomIn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_button"
+            android:contentDescription="@string/zoom_in"
+            android:gravity="center"
+            android:minWidth="30dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="+"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/qualityRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnHd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button"
+                android:contentDescription="@string/quality_hd"
+                android:paddingStart="9dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="9dp"
+                android:paddingBottom="5dp"
+                android:text="@string/quality_hd"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/btnSd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/bg_button"
+                android:contentDescription="@string/quality_sd"
+                android:paddingStart="9dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="9dp"
+                android:paddingBottom="5dp"
+                android:text="@string/quality_sd"
+                android:textColor="@color/cr_text_secondary"
+                android:textSize="11sp"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+    </LinearLayout>
+</merge>

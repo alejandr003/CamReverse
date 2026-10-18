@@ -1,0 +1,193 @@
+<resources>
+    <string name="app_name">CamRevert</string>
+
+    <!-- Cámaras -->
+    <string name="cam_fixed">Fija</string>
+    <string name="cam_ptz">PTZ</string>
+    <string name="cam_both">Ambas</string>
+    <string name="quality_hd">HD</string>
+    <string name="quality_sd">SD</string>
+    <string name="state_idle">En espera</string>
+    <string name="state_connecting">Conectando</string>
+    <string name="state_buffering">Buffering</string>
+    <string name="state_playing">Reproduciendo</string>
+    <string name="state_error">Error</string>
+    <string name="state_ended">Finalizado</string>
+    <!-- Punto 6: la tarjeta nunca dice solo «Finalizado»; dice qué está pasando. -->
+    <string name="state_offline">Sin conexión</string>
+    <string name="state_reconnecting">Reconectando…</string>
+    <string name="state_restarting">Reiniciando…</string>
+    <string name="fullscreen">Pantalla completa</string>
+    <string name="exit_fullscreen">Salir de pantalla completa</string>
+    <string name="mute">Silenciar</string>
+    <string name="unmute">Activar sonido</string>
+    <string name="zoom">Zoom</string>
+    <string name="zoom_out">Reducir zoom</string>
+    <string name="zoom_in">Aumentar zoom</string>
+    <string name="take_photo">Tomar foto</string>
+    <string name="photo_saved">Foto guardada en la galería</string>
+    <string name="photo_failed">No se pudo guardar la foto</string>
+
+    <!-- Pestañas -->
+    <string name="tab_ptz">PTZ</string>
+    <string name="tab_light">Luz</string>
+    <string name="tab_funcs">Funciones</string>
+    <string name="tab_sd">MicroSD</string>
+
+    <!-- PTZ -->
+    <string name="ptz_center">Centrar</string>
+    <string name="ptz_correction">Corrección PTZ</string>
+    <string name="ptz_presets">Presets</string>
+    <string name="ptz_goto_preset">Ir a preset</string>
+    <string name="ptz_set_preset">Guardar preset</string>
+    <string name="ptz_mapping">Mapeo de flechas</string>
+    <string name="ptz_invert_x">Invertir izquierda / derecha</string>
+    <string name="ptz_invert_y">Invertir arriba / abajo</string>
+    <string name="ptz_hold_hint">Mantén pulsado para mover, suelta para detener</string>
+    <string name="ptz_cruise_vertical">Crucero vertical</string>
+    <string name="ptz_cruise_horizontal">Crucero horizontal</string>
+    <string name="ptz_cruise_stop">Detener crucero</string>
+    <string name="ptz_cruise_on">Crucero en marcha</string>
+    <string name="ptz_cruise_off">Crucero detenido</string>
+
+    <!-- Luz y visión -->
+    <string name="night_mode">Visión nocturna</string>
+    <string name="night_ir">Infrarrojo</string>
+    <string name="night_color">Color</string>
+    <string name="night_smart">Inteligente</string>
+    <string name="night_starlight">Starlight</string>
+    <string name="night_color_sub">Sub-modo de color</string>
+    <string name="night_apply">Aplicar modo</string>
+    <string name="white_light">Luz blanca</string>
+    <string name="brightness">Brillo de la luz blanca</string>
+    <string name="light_hint">0 = apagada · 100 = máxima. Es el mismo comando que usa la app oficial.</string>
+    <string name="pulse_light">Destello</string>
+
+    <!-- Funciones comunes -->
+    <string name="funcs_title">Funciones comunes</string>
+    <string name="funcs_hint">Pulsa una casilla para activar o desactivar</string>
+    <string name="func_ptz">PTZ</string>
+    <string name="func_sound">Sonido</string>
+    <string name="func_call">Llamada</string>
+    <string name="func_motion">Detección de movimiento</string>
+    <string name="func_night">Visión nocturna</string>
+    <string name="func_light">Luz blanca</string>
+    <string name="func_siren">Sirena</string>
+    <string name="func_tracking">Seguimiento de personas</string>
+    <string name="func_frame">Cuadro de detección</string>
+    <string name="func_flip">Voltear imagen</string>
+    <string name="func_photo">Tomar foto</string>
+
+    <!-- Sirena e IA -->
+    <string name="siren">Sirena policial</string>
+    <string name="siren_action">Activar sirena</string>
+    <string name="siren_action_on">Detener sirena</string>
+    <string name="siren_state_on">Sonando ahora mismo</string>
+    <string name="siren_state_off">Apagada · toca para activar</string>
+    <string name="strobe">Luz estroboscópica</string>
+    <string name="strobe_state_on">Estado real: encendida</string>
+    <string name="strobe_state_off">Estado real: apagada</string>
+    <string name="detection">Detección</string>
+    <string name="motion">Movimiento</string>
+    <string name="human">Detección humana</string>
+    <string name="human_frame">Encuadre de persona</string>
+    <string name="tracking">Seguimiento automático</string>
+    <string name="sensitivity">Sensibilidad</string>
+    <string name="low">Baja</string>
+    <string name="medium">Media</string>
+    <string name="high">Alta</string>
+    <string name="apply_ai">Aplicar detección</string>
+
+    <!-- Llamada / intercomunicador -->
+    <string name="call">Llamada</string>
+    <string name="call_title">Intercomunicador</string>
+    <string name="call_mode_duplex">Manos libres (dúplex)</string>
+    <string name="call_mode_duplex_hint">Habla y escucha a la vez. Usa eco cancelado (AEC) y supresión de ruido.</string>
+    <string name="call_mode_ptt">Radio (push-to-talk)</string>
+    <string name="call_mode_ptt_hint">Mantén pulsado para hablar. El sonido de los vídeos se silencia.</string>
+    <string name="call_start">Iniciar</string>
+    <string name="call_stop">Detener</string>
+    <string name="call_ptt_label">MANTÉN PULSADO PARA HABLAR</string>
+    <string name="call_active">Llamada activa</string>
+    <string name="call_effects">Eco: %1$s · Ruido: %2$s</string>
+    <string name="on">Sí</string>
+    <string name="off">No</string>
+    <string name="mic_permission_needed">Se necesita permiso de micrófono para la llamada</string>
+
+    <!-- MicroSD y salud -->
+    <string name="status">Estado de la cámara</string>
+    <string name="refresh_status">Actualizar estado</string>
+    <string name="sd_title">Tarjeta MicroSD</string>
+    <string name="sd_card">Tarjeta</string>
+    <string name="sd_total">Total</string>
+    <string name="sd_free">Libre</string>
+    <string name="sd_state">Estado</string>
+    <string name="sd_progress">Ocupación</string>
+    <string name="sd_recording">Grabando</string>
+    <string name="sd_schedule">Grabación por programación</string>
+    <string name="sd_format">Formatear tarjeta</string>
+    <string name="sd_format_confirm_title">¿Formatear la MicroSD?</string>
+    <string name="sd_format_confirm_message">Se borrarán todas las grabaciones de la tarjeta. Esta acción no se puede deshacer.</string>
+    <string name="sd_mark">Marcar archivo actual</string>
+    <string name="sd_dates">Fechas con grabaciones</string>
+    <string name="sd_files">Archivos de la fecha</string>
+    <string name="sd_load_dates">Cargar fechas</string>
+    <string name="sd_back_dates">‹ Fechas</string>
+    <string name="sd_back_hours">‹ Horas</string>
+    <string name="sd_clips_of">Clips de %1$s</string>
+    <string name="sd_no_clips">La cámara no devolvió clips de esa fecha.</string>
+    <string name="sd_player_hint">Para ver un clip hace falta el reproductor nativo del app oficial: el flujo del fichero no sale por el túnel CGI (pendiente).</string>
+    <string name="sd_empty">Sin datos todavía. Pulsa «Cargar fechas».</string>
+    <string name="reboot">Reiniciar cámara</string>
+    <string name="reboot_confirm_title">Reiniciar cámara</string>
+    <string name="reboot_confirm_message">La cámara se reiniciará y perderá la conexión durante unos segundos.</string>
+    <string name="settings">Configuración</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close">Cerrar</string>
+    <string name="latency">Latencia</string>
+    <string name="resolution">Resolución</string>
+
+    <!-- Diálogo de configuración -->
+    <string name="cfg_ip">IP de la cámara</string>
+    <string name="cfg_uid">UID / DID (P2P)</string>
+    <string name="cfg_vuid">VUID (prefijo VE)</string>
+    <string name="cfg_p2p_did">ID P2P real (17 caracteres, p. ej. VPTN…)</string>
+    <string name="cfg_das_address">Dirección P2P DAS-… (132 caracteres, la exige el SDK)</string>
+    <string name="cfg_user">Usuario</string>
+    <string name="cfg_password">Contraseña</string>
+    <!-- Cuenta EYE4 (nube del visor oficial): solo se usa para pedir el token de
+         autorizacion de sesion. Ver P2PControlManager.authenticateSession(). -->
+    <string name="cfg_account_user">Cuenta EYE4 (email)</string>
+    <string name="cfg_account_password">Clave de la cuenta</string>
+    <string name="cfg_port_fixed">Puerto RTSP lente fija</string>
+    <string name="cfg_port_ptz">Puerto RTSP lente PTZ</string>
+    <string name="cfg_voice_channel">Canal de voz (P2P)</string>
+    <string name="cfg_voice_codec">Códec de voz</string>
+    <string name="codec_g711a">G.711 A-law</string>
+    <string name="codec_g711u">G.711 µ-law</string>
+    <string name="codec_pcm16">PCM 16 bits</string>
+    <string name="cfg_scan">Buscar en la red local</string>
+    <string name="cfg_scan_hint">Escaneando red local…</string>
+    <string name="cfg_scan_result">Encontradas %1$d cámaras</string>
+    <string name="cfg_scan_none">No se detectaron cámaras</string>
+    <string name="cfg_auto_connect">Conectar el túnel P2P al abrir la app</string>
+    <string name="cfg_prefer_software">Forzar decodificador de vídeo por software (equipos lentos)</string>
+
+    <!-- Conexión P2P -->
+    <string name="p2p_disconnected">P2P: desconectado</string>
+    <string name="p2p_connecting">P2P: conectando</string>
+    <string name="p2p_online">P2P: en línea</string>
+    <string name="p2p_error">P2P: error</string>
+    <string name="p2p_unavailable">P2P no disponible (sin librería nativa para esta CPU)</string>
+    <string name="p2p_connect">Conectar P2P</string>
+    <string name="p2p_disconnect">Desconectar</string>
+
+    <!-- Consola diagnóstica P2P (punto 1) -->
+    <string name="console">Consola P2P</string>
+    <string name="console_title">Diagnóstico P2P en vivo</string>
+    <string name="console_hint">Todo código de create/connect/login, stateListener, ClientCommandListener y respuestas CGI.</string>
+    <string name="console_clear">Limpiar</string>
+    <string name="console_follow">Seguir fin</string>
+    <string name="console_empty">Sin eventos todavía. Pulsa «Conectar P2P».</string>
+</resources>

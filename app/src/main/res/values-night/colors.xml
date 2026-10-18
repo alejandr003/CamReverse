@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Modo noche: la app ya es oscura por diseño; se reutiliza la misma paleta -->
+    <color name="cr_background">#FF0B0F14</color>
+    <color name="cr_surface">#FF131A22</color>
+</resources>

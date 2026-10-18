@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta oscura de monitoreo (bajo contraste de fondo, alto contraste de acento) -->
+    <color name="cr_background">#FF0B0F14</color>
+    <color name="cr_surface">#FF131A22</color>
+    <color name="cr_surface_hi">#FF1B242E</color>
+    <color name="cr_stroke">#FF273240</color>
+
+    <color name="cr_text_primary">#FFE8EEF4</color>
+    <color name="cr_text_secondary">#FF93A3B4</color>
+    <color name="cr_text_dim">#FF64748B</color>
+
+    <!-- Acento principal (cian sobrio) -->
+    <color name="cr_accent">#FF39A0FF</color>
+    <color name="cr_accent_pressed">#FF1F7FD6</color>
+
+    <!-- Feedback táctil de la cruceta PTZ: fondo mientras se mantiene pulsado -->
+    <color name="cr_dpad_active">#FF2E7D32</color>
+
+    <!-- Semántica de estado -->
+    <color name="cr_state_online">#FF37C878</color>
+    <color name="cr_state_connecting">#FFF2A93B</color>
+    <color name="cr_state_error">#FFFF5A5A</color>
+
+    <!-- Iconos (vectoriales monocromos) -->
+    <color name="cr_icon">#FFE8EEF4</color>
+    <color name="cr_icon_dim">#FF93A3B4</color>
+
+    <color name="cr_overlay_scrim">#99000000</color>
+</resources>

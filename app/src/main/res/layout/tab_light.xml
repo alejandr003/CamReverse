@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <!-- Punto 3 — 4 modos de visión nocturna -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/night_mode"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="camera_control.cgi?param=37&amp;fullcolormode=…"
+            android:textColor="@color/cr_text_dim"
+            android:textSize="10sp"
+            android:fontFamily="monospace" />
+
+        <RadioGroup
+            android:id="@+id/nightGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbNightIr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:gravity="center_vertical"
+                android:minHeight="44dp"
+                android:text="@string/night_ir"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="13sp"
+                tools:ignore="RtlSymmetry" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbNightColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:gravity="center_vertical"
+                android:minHeight="44dp"
+                android:text="@string/night_color"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="13sp"
+                tools:ignore="RtlSymmetry" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbNightSmart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:gravity="center_vertical"
+                android:minHeight="44dp"
+                android:text="@string/night_smart"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="13sp"
+                tools:ignore="RtlSymmetry" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbNightStarlight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:gravity="center_vertical"
+                android:minHeight="44dp"
+                android:text="@string/night_starlight"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="13sp"
+                tools:ignore="RtlSymmetry" />
+        </RadioGroup>
+
+        <!-- Sub-modo de color (para Color y Starlight) -->
+        <TextView
+            android:id="@+id/tvColorSubLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/night_color_sub"
+            android:textColor="@color/cr_text_secondary"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnSub1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="1"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btnSub2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="2"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btnSub3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="3"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/cr_stroke" />
+
+        <!-- Punto 3 — luz blanca real.
+             El brillo ES el mando: `set_whiteled_value.cgi?whiteled=0..100&`
+             (0 = apagado, 100 = máxima). Verificado en equipo, AGENTS.md §5.10. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_lightbulb"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="@string/brightness"
+                android:textColor="@color/cr_text_secondary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvBrightness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="0"
+                android:textColor="@color/cr_text_primary"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/seekBrightness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="@color/cr_accent"
+            android:thumbTint="@color/cr_accent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/light_hint"
+            android:textColor="@color/cr_text_dim"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/btnPulseLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_button"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/pulse_light"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/cr_stroke" />
+
+        <!-- Sirena y estrobo: aquí para no perder acceso rápido -->
+        <LinearLayout
+            android:id="@+id/btnSiren"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_siren"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <ImageView
+                android:id="@+id/ivSirenIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_siren"
+                tools:ignore="RtlSymmetry" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSirenAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/siren_action"
+                    android:textColor="@color/cr_text_primary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSirenState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/state_idle"
+                    android:textColor="@color/cr_text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swStrobe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:minHeight="44dp"
+            android:text="@string/strobe"
+            android:textColor="@color/cr_text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvStrobeState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="@string/state_idle"
+            android:textColor="@color/cr_text_dim"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

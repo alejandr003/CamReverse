@@ -1,0 +1,70 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema oscuro fijo: es una app de monitoreo 24/7, el modo claro no aplica.
+         Se fuerza Dark para que el consumo y el brillo se mantengan estables en tablet. -->
+    <style name="Base.Theme.CamRevert" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/cr_accent</item>
+        <item name="colorOnPrimary">#FF04121F</item>
+        <item name="colorPrimaryContainer">@color/cr_accent_pressed</item>
+        <item name="colorOnPrimaryContainer">#FFFFFFFF</item>
+
+        <item name="colorSecondary">@color/cr_accent</item>
+        <item name="colorOnSecondary">#FF04121F</item>
+        <item name="colorSecondaryContainer">@color/cr_surface_hi</item>
+        <item name="colorOnSecondaryContainer">@color/cr_text_primary</item>
+
+        <item name="android:colorBackground">@color/cr_background</item>
+        <item name="colorOnBackground">@color/cr_text_primary</item>
+
+        <item name="colorSurface">@color/cr_surface</item>
+        <item name="colorSurfaceContainer">@color/cr_surface</item>
+        <item name="colorSurfaceContainerHigh">@color/cr_surface_hi</item>
+        <item name="colorSurfaceContainerHighest">@color/cr_surface_hi</item>
+        <item name="colorSurfaceVariant">@color/cr_surface_hi</item>
+        <item name="colorOnSurface">@color/cr_text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/cr_text_secondary</item>
+
+        <item name="colorOutline">@color/cr_stroke</item>
+        <item name="colorOutlineVariant">@color/cr_stroke</item>
+        <item name="colorError">@color/cr_state_error</item>
+        <item name="colorOnError">#FFFFFFFF</item>
+
+        <item name="android:statusBarColor">@color/cr_background</item>
+        <item name="android:navigationBarColor">@color/cr_background</item>
+        <item name="android:windowBackground">@color/cr_background</item>
+        <item name="android:textColorPrimary">@color/cr_text_primary</item>
+        <item name="android:textColorSecondary">@color/cr_text_secondary</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+
+        <!-- Botones planos y compactos (sin elevación = menos overdraw) -->
+        <item name="materialButtonStyle">@style/CrButton</item>
+        <item name="android:selectableItemBackground">@color/cr_surface_hi</item>
+    </style>
+
+    <style name="CrButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/cr_text_primary</item>
+        <item name="android:textSize">13sp</item>
+        <item name="iconTint">@color/cr_icon_dim</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <!-- Casilla de la cuadrícula «Funciones Comunes» (punto 6).
+         layout_weight = 1 reparte las 3 columnas; el margen de 4dp de cada
+         casilla deja 8dp de separación y 16dp a los bordes (padding 12dp + 4dp),
+         simétrico en las cuatro filas. -->
+    <style name="FuncTile">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:minHeight">76dp</item>
+    </style>
+
+    <style name="Theme.CamRevert" parent="Base.Theme.CamRevert" />
+</resources>

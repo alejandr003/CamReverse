@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Tinte de los iconos de la cruceta de pantalla completa.
+
+    Esos botones flotan **sobre el vídeo** y no llevan fondo (`bg_dpad`): un cuadrado
+    verde quedaría feo encima de la imagen. El feedback táctil se da tiñendo el icono.
+    Igual que en `sel_dpad`, el `state_pressed` lo activa a mano `MainActivity`
+    (`isPressed`), porque el `OnTouchListener` consume el toque.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/cr_state_online" android:state_pressed="true" />
+    <item android:color="@color/cr_icon" />
+</selector>

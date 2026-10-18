@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Fondo circular de la cruceta PTZ con feedback táctil.
+
+    El `state_pressed` NO lo activa el framework por su cuenta: los botones de la
+    cruceta consumen el toque con un `OnTouchListener` que devuelve `true`, así que
+    `View.onTouchEvent` nunca corre y `setPressed()` no se dispara solo. Es
+    `MainActivity.bindPtzTab()` / `setupFullscreenOverlay()` quien llama a
+    `isPressed = true/false` en `ACTION_DOWN` / `ACTION_UP`|`ACTION_CANCEL`, y así
+    este selector reacciona.
+
+    Reposo = mismo aspecto que el antiguo `bg_dpad`; pulsado = verde `cr_dpad_active`.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/cr_dpad_active" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/cr_dpad_active" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/cr_surface_hi" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/cr_stroke" />
+        </shape>
+    </item>
+</selector>
