@@ -1,5 +1,7 @@
 # CamRevert
 
+> 🌐 **Español** · [English](README.en.md)
+
 Cliente **nativo Android** (Kotlin) para cámaras **O-KAM Pro / VStarcam / Eye4** de doble
 lente (lente fija + **domo PTZ**): vídeo por RTSP directo, control PTZ real, luz, visión
 nocturna, sirena, detección y MicroSD.
@@ -32,10 +34,10 @@ cámara espera, sin inventarse nada.
 | **Presets**: guardar (`set_sensor_preset.cgi`) e ir (`command=64+N`) | ✅ Aceptado (ir a preset, por confirmar a la vista) |
 | **Conexión automática** del túnel P2P al abrir la app | ✅ Conmutable en Configuración |
 | Decodificación con **respaldo por software** (+ forzar decoder) | ✅ |
-| Luz blanca (encendido, brillo PWM, temporizador), visión nocturna | ⚠️ El **encendido** tiene candidato claro (`trans_cmd_string.cgi?cmd=2109…` → `lightStatus=1`); falta confirmación visual. `display_pwm_ctrl.cgi` **no existe** en este firmware |
-| Sirena policial y estrobo | ✅ por CGI |
+| Luz blanca (encendido, brillo), visión nocturna | ✅ El **brillo** es a la vez el interruptor y el nivel; la cámara lo devuelve al leerlo |
+| Sirena policial y estrobo | ✅ por CGI, con el estado real releído del equipo |
 | Detección humana / movimiento / seguimiento | ✅ por CGI |
-| MicroSD: consulta, marcar archivo, formatear, navegador de clips | ✅ consulta; reproducción de clip limitada (ver *Limitaciones*) |
+| MicroSD: consulta, marcar archivo, formatear, navegador de clips | ✅ consulta y navegador; ver un clip necesita el reproductor nativo (ver *Limitaciones*) |
 | Intercomunicador G.711 A-law (dúplex y push-to-talk) | ⚠️ Envío sí; **recepción** sin confirmar |
 | **Acceso remoto** (fuera de tu wifi) | ⚠️ Con el túnel P2P; hoy en día se usa en LAN |
 | Funcionar en un equipo **32 bits** | ❌ No hay binarios arm64-v8a alternativos |
@@ -148,7 +150,7 @@ Al guardar, la app reconecta el vídeo y el túnel P2P automáticamente.
 - **Pestaña PTZ**: rueda de 8 direcciones + centro (`command=25`), «Corrección PTZ»,
   «Patrulla», presets (ir / guardar) e inversión de ejes X/Y por si tu domo va al revés.
 - **Pestaña Luz**: visión nocturna (IR / color / inteligente / starlight), luz blanca
-  (interruptor, brillo, destello, temporizador), sirena y estrobo.
+  (deslizador de brillo, destello), sirena y estrobo.
 - **Pestaña Funciones**: cuadrícula tipo O-KAM (PTZ, sonido, llamada, detección, visión
   nocturna, luz, sirena, seguimiento, cuadro de detección, voltear imagen, **foto**,
   consola P2P).
@@ -229,8 +231,12 @@ AGENTS.md                    especificación técnica interna con la evidencia d
 |---|---|
 | [`docs/CONFIGURACION.md`](docs/CONFIGURACION.md) | Todas las claves explicadas (qué es `TUCORREO`, `PASSWORD`, `CAMPASSWORD`, `VUID`), `.env` vs `secrets.properties`, y cómo obtener el ID P2P y la dirección `DAS-`. |
 | [`docs/COMO-FUNCIONA.md`](docs/COMO-FUNCIONA.md) | Arquitectura, protocolos (RTSP + P2P + CGI), la autorización de sesión, y **cómo se hizo**: método de ingeniería inversa, qué se leyó (binarios, logs, capturas), qué se probó. |
+| [`docs/COMANDOS.md`](docs/COMANDOS.md) | La tabla maestra de comandos CGI: qué hace cada uno, su respuesta real y cuáles no existen en este firmware. |
 | [`docs/HALLAZGOS-PTZ.md`](docs/HALLAZGOS-PTZ.md) | El cuaderno de la investigación PTZ: cómo se interceptó al oficial, qué se descubrió y cuál era la causa raíz. |
 | [`AGENTS.md`](AGENTS.md) | Especificación técnica con direcciones de memoria, desensamblados y tablas de errores del SDK. |
+
+> 🇬🇧 **English docs**: [`README.en.md`](README.en.md) · [`docs/en/`](docs/en/README.md) —
+> todas las guías de usuario están también en inglés.
 
 ---
 

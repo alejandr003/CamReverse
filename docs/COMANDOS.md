@@ -1,5 +1,7 @@
 # COMANDOS — Tabla maestra de la cámara O-KAM Pro / VStarcam (T23-N)
 
+> 🌐 **Español** · [English](en/COMMANDS.md)
+
 Documento vivo. Toda orden que CamRevert puede enviar, con su URL, qué hace y **la evidencia**.
 Se actualiza cada vez que se descubre o se verifica algo.
 
@@ -206,14 +208,18 @@ Campos relacionados en `get_params.cgi?`:
 | Comando | Qué hace |
 |---|---|
 | `decoder_control.cgi?command=0&onestep=0&` | Arriba |
-| `decoder_control.cgi?command=1&onestep=0&` | Abajo |
-| `decoder_control.cgi?command=2&onestep=0&` | Izquierda |
-| `decoder_control.cgi?command=3&onestep=0&` | Derecha |
-| `decoder_control.cgi?command=4&onestep=0&` | Ir a preset 1 |
-| `decoder_control.cgi?command=5&onestep=0&` | Ir a preset 2 |
-| `decoder_control.cgi?command=6&onestep=0&` | Ir a preset 3 … |
-| `decoder_control.cgi?command=7&onestep=0&` | Ir a preset 4 |
-| `trans_cmd_string.cgi?cmd=2013&command=2&posturn=1&` | **Centrar** (volver a posición) |
+| `decoder_control.cgi?command=1&onestep=0&` | Parar |
+| `decoder_control.cgi?command=2&onestep=0&` | Abajo |
+| `decoder_control.cgi?command=3&onestep=0&` | Parar |
+| `decoder_control.cgi?command=4&onestep=0&` | Izquierda |
+| `decoder_control.cgi?command=5&onestep=0&` | Parar |
+| `decoder_control.cgi?command=6&onestep=0&` | Derecha |
+| `decoder_control.cgi?command=7&onestep=0&` | Parar |
+| `decoder_control.cgi?command=25&onestep=0&channel=0&` | **Centrar** (volver a posición) |
+
+No hay diagonales ni `command=8`: el firmware expone 4 ejes, cada uno con su propia parada.
+Cruceros: `command=26/27` (vertical on/off) y `command=28/29` (horizontal on/off). Presets:
+guardar con `set_sensor_preset.cgi?sensorid=255&presetid=N&`, ir con `command=64+N`.
 
 Sin el preludio de auth (§1.0) devuelven `result=-2`. Detalle completo en `HALLAZGOS-PTZ.md`.
 

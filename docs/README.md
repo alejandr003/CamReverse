@@ -1,5 +1,7 @@
 # Documentación de CamRevert
 
+> 🌐 **Español** · [English](en/README.md)
+
 | Documento | Para quién | Contenido |
 |---|---|---|
 | [`../README.md`](../README.md) | Todos | Qué es, con qué cámaras funciona, instalación, uso, problemas frecuentes, créditos y licencia. |

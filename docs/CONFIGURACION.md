@@ -1,5 +1,7 @@
 # Configuración — todas las claves, explicadas
 
+> 🌐 **Español** · [English](en/CONFIGURATION.md)
+
 CamRevert necesita **dos juegos de credenciales distintos** y varios identificadores. Es la
 parte que más confunde, así que aquí está todo junto y con los nombres que verás en el
 diálogo de la app.
