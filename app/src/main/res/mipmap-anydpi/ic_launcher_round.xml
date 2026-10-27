@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icono redondo para Android 7.1 (sin iconos adaptativos). -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_launcher_background_circle" />
+    <item android:drawable="@drawable/ic_launcher_foreground" />
+</layer-list>

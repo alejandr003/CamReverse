@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fondo con esquinas redondeadas para los lanzadores antiguos (API 24-25). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:pathData="M24,0 H84 A24,24 0 0,1 108,24 V84 A24,24 0 0,1 84,108 H24 A24,24 0 0,1 0,84 V24 A24,24 0 0,1 24,0 Z"
+        android:fillColor="#121417" />
+    <path
+        android:pathData="M54,54m-42,0a42,42 0,1 1,84 0a42,42 0,1 1,-84 0"
+        android:fillColor="#1A1E24" />
+</vector>

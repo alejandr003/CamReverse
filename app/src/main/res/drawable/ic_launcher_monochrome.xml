@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Capa monocroma para los iconos temáticos de Android 13+.
+  Android usa solo la transparencia y aplica su propio tinte, así que aquí el
+  emblema va como contorno (un relleno sólido se vería como una mancha).
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.8"
+        android:scaleY="0.8">
+
+        <!-- Arcos orbitales PTZ -->
+        <path
+            android:pathData="M54,20 A34,34 0 0,1 88,54"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="3.5"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M54,88 A34,34 0 0,1 20,54"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="3.5"
+            android:strokeLineCap="round" />
+
+        <!-- Puntas de flecha -->
+        <path
+            android:pathData="M84,48 L88,55 L95,50 Z"
+            android:fillColor="#FFFFFF" />
+        <path
+            android:pathData="M24,60 L20,53 L13,58 Z"
+            android:fillColor="#FFFFFF" />
+
+        <!-- Carcasa del domo (contorno) -->
+        <path
+            android:pathData="M34,44 L74,44 A20,20 0 0,1 54,74 A20,20 0 0,1 34,44 Z"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="3.5" />
+
+        <!-- Soporte superior -->
+        <path
+            android:pathData="M30,42 L78,42 L74,36 L34,36 Z"
+            android:fillColor="#FFFFFF" />
+
+        <!-- Lente -->
+        <path
+            android:pathData="M54,54m-13,0a13,13 0,1 1,26 0a13,13 0,1 1,-26 0"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="3" />
+        <path
+            android:pathData="M54,54m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"
+            android:fillColor="#FFFFFF" />
+
+    </group>
+</vector>
