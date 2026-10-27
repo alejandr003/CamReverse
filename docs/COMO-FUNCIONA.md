@@ -1,5 +1,7 @@
 # Cómo funciona CamRevert (y cómo se averiguó)
 
+> 🌐 **Español** · [English](en/HOW-IT-WORKS.md)
+
 Este documento explica **qué hace la app por dentro** y **cómo se descubrió**. La evidencia
 cruda (direcciones de memoria, desensamblados, tablas de errores) está en
 [`../AGENTS.md`](../AGENTS.md); aquí está lo entendible.

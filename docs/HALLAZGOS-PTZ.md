@@ -1,5 +1,7 @@
 # Hallazgos PTZ — el cuaderno de la investigación
 
+> 🌐 **Español** · [English](en/PTZ-FINDINGS.md)
+
 > **Resultado**: ✅ **resuelto**. La cámara exige un **token de la cuenta Eye4** en cada
 > sesión (`eye4_authentication.cgi`) antes de ejecutar cualquier orden. En cuanto se envía,
 > el domo se mueve: los 4 ejes, sus paradas, el centrado, los cruceros y los presets.
